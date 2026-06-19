@@ -1,0 +1,8 @@
+REDIS
+
+1. Redis is a Key Value pair storage mainly used for caching data and to reduce load on DB by first checking the redis before making the call to DB.
+2. When a new request comes up the server first checks if the data requested is present in Redis first , if it exists then it returns the data from there otherwise make a call to DB and updates the Redis.
+3. Each entry in Redis has a TTL (Time to live) after which the entry gets deleted to keep memomry available.
+4. For deletion Redis uses 2 ways, first is Lazy deletion where whenever a key is accessed it checks if its TTL has expired and if it has then it deletes the entry. Second way is Active deletion where a service does occasional checks to see every entry that has TTL expired and deletes it. In practice Redis uses both. 
+4. The reason why Redis is fast is because redis stores data in RAM instead of Discs which is faster.
+5. For redis to persist there are 2 ways first we can periodically post a snapshot of redis data into a file, whenever service goes down redis can read that snapshot and set it up again. Second is storing write logs of Redis and again when redis comes back up it reads the logs and create map again. This is called RDB (Resaved Database/snapshotting) and AOF(Append only file).
