@@ -1,0 +1,1 @@
+1. MongoDB aggregation pipeline — combine countDocuments and find into one query.
